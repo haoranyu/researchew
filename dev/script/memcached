@@ -1,0 +1,100 @@
+#! /bin/sh
+#
+# chkconfig: - 55 45
+# description:  The memcached daemon is a network memory cache service.
+# processname: memcached
+# pidfile: /var/run/memcached/memcached_*.pid
+
+# Standard LSB functions
+#. /lib/lsb/init-functions
+
+# Source function library.
+. /etc/init.d/functions
+
+#ports that memcached will listen
+PORTS=(11211 11212)
+USER=memcached
+MAXCONN=1024
+CACHESIZE=64
+OPTIONS=""
+
+# Check that networking is up.
+. /etc/sysconfig/network
+
+if [ "$NETWORKING" = "no" ]
+then
+    exit 0
+fi
+
+RETVAL=0
+prog="memcached"
+pidfile_prefix="/var/run/memcached/memcached_"
+pidfile_suffix=".pid"
+lockfile="/var/lock/subsys/memcached"
+
+INSTANCE_NUM=${#PORTS[@]}
+
+start () {
+    echo -n $"Starting $prog: "
+    # Ensure that $pidfile directory has proper permissions and exists
+    piddir=`dirname $pidfile_prefix`
+    if [ ! -d $piddir ]; then
+        mkdir $piddir
+    fi
+    if [ "`stat -c %U $piddir`" != "$USER" ]; then
+        chown $USER $piddir
+    fi
+    for ((i=0; i < $INSTANCE_NUM; i++)); do
+        pidfile=$pidfile_prefix${PORTS[${i}]}$pidfile_suffix
+        daemon --pidfile ${pidfile} memcached -d -p ${PORTS[${i}]} -u $USER  -m $CACHESIZE -c $MAXCONN -P ${pidfile} $OPTIONS
+        RETVAL=$?
+        if [ $RETVAL -ne 0 ] ; then
+            echo "Start instance with port ${PORTS[${i}]} failed!"
+        else 
+            touch ${lockfile}
+        fi;
+    done;
+    echo
+}
+stop () {
+    echo -n $"Stopping $prog: "
+    for ((i=0; i < $INSTANCE_NUM; i++)); do
+        pidfile=$pidfile_prefix${PORTS[${i}]}$pidfile_suffix
+        killproc -p ${pidfile} /usr/bin/memcached
+        RETVAL=$?
+        if [ $RETVAL -ne 0 ] ; then
+            echo "Stop instance with port ${PORTS[${i}]} failed!"
+        else 
+            rm -f ${pidfile}
+        fi;
+    done;
+    echo
+    rm -f ${lockfile}
+}
+
+restart () {
+    stop
+    start
+}
+
+
+# See how we were called.
+case "$1" in
+    start)
+      start
+      ;;
+    stop)
+      stop
+      ;;
+    restart|reload|force-reload)
+      restart
+      ;;
+    condrestart|try-restart)
+      [ -f ${lockfile} ] && restart || :
+      ;;
+    *)
+      echo $"Usage: $0 {start|stop|status|restart|reload|force-reload|condrestart|try-restart}"
+      RETVAL=2
+          ;;
+esac
+exit $RETVAL

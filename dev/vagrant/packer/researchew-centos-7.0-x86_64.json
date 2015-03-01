@@ -1,0 +1,52 @@
+{
+    "builders": [{
+        "type": "virtualbox-iso",
+        "virtualbox_version_file": ".vbox_version",
+        "headless": false,
+
+        "vm_name": "researchew-centos-7.0-x86_64",
+
+        "guest_os_type": "RedHat_64",
+        "disk_size": 40960,
+
+        "iso_url": "http://centos.ustc.edu.cn/centos/7.0.1406/isos/x86_64/CentOS-7.0-1406-x86_64-Minimal.iso",
+        "iso_checksum": "495a7d50eb7633c4667fbfc5e817bf244697c627",
+        "iso_checksum_type": "sha1",
+
+        "boot_command": [
+            "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+        ],
+        "boot_wait": "8s",
+
+        "http_directory": "http",
+        "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+
+        "ssh_username": "vagrant",
+        "ssh_password": "vagrant",
+        "ssh_port": 22,
+        "ssh_wait_timeout": "9600s",
+
+        "vboxmanage": [
+            ["modifyvm", "{{.Name}}", "--memory", "1024"],
+            ["modifyvm", "{{.Name}}", "--cpus", "2"]
+        ],
+
+        "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+        "scripts": [
+            "scripts/vagrant.sh",
+            "scripts/vboxguest.sh",
+            "scripts/yum.sh",
+            "scripts/lnmp.sh",
+            "scripts/beanstalkd.sh",
+            "scripts/compact.sh"
+        ]
+    }],
+    "post-processors": [{
+        "output": "build/researchew-centos-7.0-x86_64-{{isotime \"20060102150405\"}}.box",
+        "type": "vagrant"
+    }]
+}
