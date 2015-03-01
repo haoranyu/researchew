@@ -1,5 +1,8 @@
 Researchew
 =========
+Author: Haoran Yu, Bolun Qi, Zheyi Zhu, Liyi Sun
+@ University of Illinois at Urbana-Champaign
+
 ## Application domain:
 
 Basically it is a review application for research papers. Its main logic is very similar to yelp, but the entity that to be reviewed is research papers.
