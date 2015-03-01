@@ -1,6 +1,7 @@
 Researchew
 =========
 Author: Haoran Yu, Bolun Qi, Zheyi Zhu, Liyi Sun
+
 @ University of Illinois at Urbana-Champaign
 
 ## Application domain:
