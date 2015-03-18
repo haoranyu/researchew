@@ -16,7 +16,6 @@ class CreateReviewsTable extends Migration {
         {
             $table->increments('id');
             $table->text('content');
-            $table->string('author', 255)->nullable();
             $table->integer('rating');
             $table->integer('user_id');
             $table->integer('paper_id');
