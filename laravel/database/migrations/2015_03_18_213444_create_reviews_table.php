@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateReviewsTable extends Migration {
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('reviews', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->text('content');
+            $table->string('author', 255)->nullable();
+            $table->integer('rating');
+            $table->integer('user_id');
+            $table->integer('paper_id');
+            $table->timestamp('created_at');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('reviews');
+    }
+
+}
