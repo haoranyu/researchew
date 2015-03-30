@@ -6231,3 +6231,9 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+footer {
+  height: 60px;
+  line-height: 60px;
+}
+
+/*# sourceMappingURL=app.css.map */
