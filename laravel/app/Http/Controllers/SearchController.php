@@ -32,7 +32,8 @@ class SearchController extends Controller {
 	 */
 	public function index($query)
 	{
-		return view('search',['query' => $query]);
+		$results = json_decode(file_get_contents('https://web.engr.illinois.edu/~hyu34/scholar/?q='.$query));
+		return view('search',['results' => $results]);
 	}
 
 }
