@@ -21,7 +21,7 @@
 @section('script')
 <script>
     $(document).on('click', '#search', function(){
-        location.href = "/search/" + $('#query').val();
+        location.href = "/search/" + $('#query').val() + "/";
     });
 </script>
 @endsection

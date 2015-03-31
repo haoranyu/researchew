@@ -29,10 +29,28 @@ class SearchController extends Controller {
      *
      * @return Response
      */
-    public function index($query)
+    public function index($query, $page = 1)
     {
         $results = json_decode(file_get_contents('https://web.engr.illinois.edu/~hyu34/scholar/?q='.$query), TRUE);
-        return view('search',['results' => $results, 'query' => $query]);
+        foreach($results as &$result) {
+            if(sizeof($result['author']) == 1) {
+                $result['author'] = array($result['author']);
+            }
+            $result['published'] = substr($result['published'], 0, 10).' '.substr($result['published'], 11, 5);
+        }
+
+        $next = '';
+        $prev = '';
+        if(sizeof($results) < 10) $next = 'disabled';
+        if($page == 1) $prev = 'disabled';
+
+        return view('search',  ['results' => $results,
+                                'query' => $query,
+                                'next' => $next,
+                                'prev' => $prev,
+                                'page' => $page
+                               ]
+                    );
     }
 
 }
