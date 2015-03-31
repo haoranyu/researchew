@@ -22,7 +22,6 @@ class SearchController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('guest');
     }
 
     /**
@@ -32,12 +31,8 @@ class SearchController extends Controller {
      */
     public function index($query)
     {
-        $results = json_decode(file_get_contents('https://web.engr.illinois.edu/~hyu34/scholar/?q='.$query));
-        foreach($results as &$result) {
-			$result->title = htmlspecialchars_decode($result->title);
-            $result->abstract = htmlspecialchars_decode($result->abstract);
-        }
-        return view('search',['results' => $results]);
+        $results = json_decode(file_get_contents('https://web.engr.illinois.edu/~hyu34/scholar/?q='.$query), TRUE);
+        return view('search',['results' => $results, 'query' => $query]);
     }
 
 }
