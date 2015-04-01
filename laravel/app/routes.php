@@ -14,3 +14,4 @@
 Route::get('/', 'HomeController@getHome');
 Route::get('/search/{query}/{page?}', 'SearchController@getSearchResult');
 Route::get('/search', function(){ return Redirect::to('/');});
+Route::get('/paper/{hash}', 'PaperController@getPaper');

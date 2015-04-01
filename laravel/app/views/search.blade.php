@@ -12,7 +12,14 @@
         <ul class="result">
         @foreach ($results as $result)
             <li class="am-article" data-id="{{$result['id']}}">
-                <h3 class="am-article-hd">{{$result['title']}} <a href="{{$result['link'][0]['@attributes']['href']}}"> <small class="am-icon-external-link"></small></a></h3>
+                <h3 class="am-article-hd">
+                    <a target="_blank" href="../../paper/{{hash('sha1', $result['id'])}}">
+                        {{$result['title']}}
+                    </a>
+                    <a href="{{$result['link'][0]['@attributes']['href']}}">
+                        <small class="am-icon-external-link"></small>
+                    </a>
+                </h3>
                 <ol class="author am-article-meta am-icon-user">
                     @foreach ($result['author'] as $author)
                         <li>{{$author['name']}}</li>

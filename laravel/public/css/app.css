@@ -3,18 +3,30 @@ body, label, .checkbox label {
 }
 
 /* General */
-
-.am-article-meta {
-    margin: 0;
+.search-box,
+.search-result,
+.paper{
+    width: 80%;
+    margin: 0 auto;
 }
+
+ol.author {
+    list-style: none;
+    padding-left: 0;
+    padding-right: 25px;
+    line-height: 24px;
+}
+ol.author li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
 
 /* Home */
 .search-box {
-    width: 80%;
     height: 400px;
     padding: 30px 100px;
     text-align: center;
-    margin: 0 auto;
 }
 .search-box h1 {
     font-size: 50px;
@@ -24,10 +36,6 @@ body, label, .checkbox label {
 }
 
 /* Search Result */
-.search-result {
-    width: 80%;
-    margin: 0 auto;
-}
 ul.result {
     list-style: none;
     padding-left: 0;
@@ -36,20 +44,19 @@ ul.result h3 {
     margin-bottom: 0;
 }
 
-ul.result ol.author {
-    list-style: none;
-    padding-left: 0;
-    padding-right: 25px;
-    font-size: 12px;
-    line-height: 24px;
-}
-ul.result ol.author li {
-    display: inline-block;
-    margin-left: 10px;
-}
-
 ul.result p {
     margin-top: 0;
+}
+ul.result ol.author {
+    font-size: 12px;
+}
+ul.result .am-article-meta {
+    margin: 0;
+}
+
+/* Paper */
+.paper .am-article-title {
+    margin-bottom: 0;
 }
 
 footer {

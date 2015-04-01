@@ -15,6 +15,7 @@ class CreatePapersTable extends Migration {
         Schema::create('papers', function($table)
         {
             $table->string('id', 255);
+            $table->string('hash', 40);
             $table->string('title', 255);
             $table->text('abstract')->nullable();
             $table->string('author', 255)->nullable();
