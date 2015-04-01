@@ -1,0 +1,48 @@
+body, label, .checkbox label {
+    font-weight: 300;
+}
+
+
+/* Home */
+.search-box {
+    width: 80%;
+    height: 400px;
+    padding: 30px 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+.search-box h1 {
+    font-size: 50px;
+}
+.search-box p {
+    color: #999;
+}
+
+/* Search Result */
+ul.result {
+    list-style: none;
+    padding-left: 0;
+}
+ul.result .time span {
+    margin-right: 10px;
+    font-size: 12px;
+    line-height: 24px;
+}
+ul.result ol.author {
+    list-style: none;
+    padding-left: 0;
+    font-size: 12px;
+    line-height: 24px;
+}
+ul.result ol.author li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+footer {
+    height: 60px;
+    line-height: 60px;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+}
