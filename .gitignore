@@ -3,5 +3,6 @@
 .DS_Store
 /.vagrant/
 /*/app/storage
+/laravel5/
 
 .idea/
