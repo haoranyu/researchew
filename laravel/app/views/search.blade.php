@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="am-container">
-    <div class="search-result">
+    <div class="search-result am-u-sm-10 am-u-sm-centered">
         <ol class="am-breadcrumb">
             <li><a href="../../">Search</a></li>
             <li class="active">Keyword: {{$query}}</li>

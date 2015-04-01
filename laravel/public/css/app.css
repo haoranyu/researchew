@@ -5,8 +5,8 @@ body, label, .checkbox label {
 /* General */
 .search-box,
 .search-result,
-.paper{
-    width: 80%;
+.paper,
+.review{
     margin: 0 auto;
 }
 
@@ -59,10 +59,12 @@ ul.result .am-article-meta {
     margin-bottom: 0;
 }
 
+/* Reviews */
+.review {
+    margin-top: 40px;
+}
+
 footer {
     height: 60px;
     line-height: 60px;
-    font-size: 12px;
-    color: #999;
-    text-align: center;
 }

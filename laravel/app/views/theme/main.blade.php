@@ -32,7 +32,7 @@
 
     @yield('content')
 
-    <footer class="text-muted text-center">
+    <footer class="am-link-muted am-text-center am-text-xs">
         CS411 @ University of Illinois at Urbana-Champaign
     </footer>
 

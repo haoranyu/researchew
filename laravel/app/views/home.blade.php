@@ -4,8 +4,10 @@ Researchew
 @endsection
 @section('content')
 <div class="am-container">
-    <div class="search-box">
-        <h1>Researchew</h1>
+    <div class="search-box am-u-sm-10 am-u-sm-centered">
+        <h1>
+            <span class="am-text-secondary">Resear</span><span class="am-text-success">ch</span><span class="am-text-success">ew</span>
+        </h1>
         <p>Find some research interest you have here...</p>
         <div class="am-input-group am-input-group-lg">
             <input type="text" id="query" class="am-form-field" placeholder="Type in the keyword">
