@@ -17,7 +17,7 @@ class SearchController extends BaseController {
 
     public function getSearchResult($query, $page = 1)
     {
-        $results = json_decode(file_get_contents('https://web.engr.illinois.edu/~hyu34/scholar/?q='.$query), TRUE);
+        $results = json_decode(file_get_contents('https://web.engr.illinois.edu/~hyu34/scholar/?q='.$query.'&page='.$page), TRUE);
         foreach($results as &$result) {
             if(sizeof($result['author']) == 1) {
                 $result['author'] = array($result['author']);
@@ -29,6 +29,16 @@ class SearchController extends BaseController {
         $prev = '';
         if(sizeof($results) < 10) $next = 'disabled';
         if($page == 1) $prev = 'disabled';
+
+        foreach($results as $paper) {
+            Paper::storePaper(
+                $paper['id'],
+                $paper['title'],
+                $paper['summary'],
+                $paper['author'],
+                strtotime(substr($paper['published'], 0, 10).' '.substr($paper['published'], 11, 5))
+                );
+        }
 
         return View::make('search')
                 ->with('query', $query)
