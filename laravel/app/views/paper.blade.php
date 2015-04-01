@@ -36,12 +36,14 @@
             <div class="am-comment-main">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
-                    <a href="#link-to-user" class="am-comment-author">..</a>
-                    评论于 <time datetime="">...</time>
+                    <a href="#link-to-user" class="am-comment-author">#USERNAME#</a>
+                    Add a review
                     </div>
                 </header>
 
-                <div class="am-comment-bd">...</div>
+                <div class="am-comment-bd">
+                    
+                </div>
             </div>
         </article>
     </div>

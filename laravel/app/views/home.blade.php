@@ -5,6 +5,11 @@ Researchew
 @section('content')
 <div class="am-container">
     <div class="search-box am-u-sm-10 am-u-sm-centered">
+        @if(Session::has('message'))
+        <div class="am-alert am-alert-success" data-am-alert>
+            {{ Session::get('message') }}
+        </div>
+        @endif
         <h1>
             <span class="am-text-secondary">Resear</span><span class="am-text-success">ch</span><span class="am-text-success">ew</span>
         </h1>

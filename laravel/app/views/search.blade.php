@@ -34,8 +34,8 @@
             </ul>
             <nav>
                 <ul class="am-pagination">
-                <li class="am-pagination-prev {{$prev}}"><a href="{{$page-1}}"><span aria-hidden="true" class="am-icon-angle-left"></span> Older</a></li>
-                <li class="am-pagination-next {{$next}}"><a href="{{$page+1}}">Newer <span aria-hidden="true" class="am-icon-angle-right"></span></a></li>
+                <li class="am-pagination-prev {{$prev}}"><a href="{{$page-1}}"><span aria-hidden="true" class="am-icon-angle-left"></span> Previous</a></li>
+                <li class="am-pagination-next {{$next}}"><a href="{{$page+1}}">Next <span aria-hidden="true" class="am-icon-angle-right"></span></a></li>
                 </ul>
             </nav>
         @else

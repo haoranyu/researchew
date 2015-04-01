@@ -15,3 +15,16 @@ Route::get('/', 'HomeController@getHome');
 Route::get('/search/{query}/{page?}', 'SearchController@getSearchResult');
 Route::get('/search', function(){ return Redirect::to('/');});
 Route::get('/paper/{hash}', 'PaperController@getPaper');
+
+Route::get('/user/reg', 'UserController@getRegister');
+Route::get('/user/login', 'UserController@getLogin');
+Route::get('/user/logout', 'UserController@getLogout');
+Route::post('/user/create', 'UserController@postCreate');
+Route::post('/user/auth', 'UserController@postAuth');
+
+
+
+Route::filter('auth', function()
+{
+    if (Auth::guest()) return Redirect::guest('user/login');
+});

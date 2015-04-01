@@ -25,8 +25,12 @@
             <a class="navbar-brand" href="{{ url('/') }}">Researchew</a>
         </h1>
         <div class="am-topbar-right">
-            <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">Login</button>
-            <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">Register</button>
+            @if(!Auth::check())
+            <a class="am-btn am-btn-primary am-topbar-btn am-btn-sm" href="/user/login">Login</a>
+            <a class="am-btn am-btn-primary am-topbar-btn am-btn-sm" href="/user/reg">Register</a>
+            @else
+            <a class="am-btn am-btn-primary am-topbar-btn am-btn-sm" href="/user/logout">Logout</a>
+            @endif
         </div>
     </header>
 
