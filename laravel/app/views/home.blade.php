@@ -1,4 +1,7 @@
 @extends('theme/main')
+@section('title')
+Researchew
+@endsection
 @section('content')
 <div class="am-container">
     <div class="search-box">

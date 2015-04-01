@@ -2,6 +2,11 @@ body, label, .checkbox label {
     font-weight: 300;
 }
 
+/* General */
+
+.am-article-meta {
+    margin: 0;
+}
 
 /* Home */
 .search-box {
@@ -19,24 +24,32 @@ body, label, .checkbox label {
 }
 
 /* Search Result */
+.search-result {
+    width: 80%;
+    margin: 0 auto;
+}
 ul.result {
     list-style: none;
     padding-left: 0;
 }
-ul.result .time span {
-    margin-right: 10px;
-    font-size: 12px;
-    line-height: 24px;
+ul.result h3 {
+    margin-bottom: 0;
 }
+
 ul.result ol.author {
     list-style: none;
     padding-left: 0;
+    padding-right: 25px;
     font-size: 12px;
     line-height: 24px;
 }
 ul.result ol.author li {
     display: inline-block;
-    margin-right: 10px;
+    margin-left: 10px;
+}
+
+ul.result p {
+    margin-top: 0;
 }
 
 footer {
