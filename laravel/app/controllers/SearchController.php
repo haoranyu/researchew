@@ -33,8 +33,8 @@ class SearchController extends BaseController {
         }
         $next = '';
         $prev = '';
-        if(sizeof($results) < 10) $next = 'disabled';
-        if($page == 1) $prev = 'disabled';
+        if(sizeof($results) < 10) $next = 'am-disabled';
+        if($page == 1) $prev = 'am-disabled';
 
         foreach($results as $paper) {
             Paper::storePaper(
