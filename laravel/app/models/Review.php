@@ -24,6 +24,6 @@ class Review extends \Eloquent {
     }
 
     public static function getPaperRatings($paper_id) {
-        return static::where('paper_id', $paper_id)->groupBy('rating')->get()->toArray();
+        return static::where('paper_id', $paper_id)->groupBy('rating')->orderBy('rating')->get()->toArray();
     }
 }

@@ -18,13 +18,19 @@ class SearchController extends BaseController {
     public function getSearchResult($query, $page = 1)
     {
         $results = json_decode(file_get_contents('https://web.engr.illinois.edu/~hyu34/scholar/?q='.$query.'&page='.$page), TRUE);
-        foreach($results as &$result) {
-            if(sizeof($result['author']) == 1) {
-                $result['author'] = array($result['author']);
+        if($results) {
+            foreach($results as &$result) {
+                if(sizeof($result['author']) == 1) {
+                    $result['author'] = array($result['author']);
+                }
+                $result['published'] = substr($result['published'], 0, 10).' '.substr($result['published'], 11, 5);
             }
-            $result['published'] = substr($result['published'], 0, 10).' '.substr($result['published'], 11, 5);
         }
-
+        else {
+            return View::make('search')
+                    ->with('query', $query)
+                    ->with('empty', true);
+        }
         $next = '';
         $prev = '';
         if(sizeof($results) < 10) $next = 'disabled';
@@ -45,7 +51,8 @@ class SearchController extends BaseController {
                 ->with('results', $results)
                 ->with('next', $next)
                 ->with('prev', $prev)
-                ->with('page', $page);
+                ->with('page', $page)
+                ->with('empty', false);
     }
 
 }
