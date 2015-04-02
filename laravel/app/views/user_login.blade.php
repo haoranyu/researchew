@@ -6,7 +6,7 @@ Login - Researchew
 <div class="am-container">
     <div class="am-u-sm-8 am-u-sm-centered">
         @if(Session::has('message'))
-        <div class="am-alert am-alert-danger" data-am-alert>{{ Session::get('message') }}</div>
+        <div class="am-alert am-alert-success" data-am-alert>{{ Session::get('message') }}</div>
         @endif
         <div class="am-panel am-panel-default">
             <div class="am-panel-hd">Login</div>
