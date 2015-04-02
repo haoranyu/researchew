@@ -61,13 +61,23 @@
             <div class="am-comment-main">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
-                    <a href="#link-to-user" class="am-comment-author">#USERNAME#</a>
-                    Add a review
+                    Post review as <a href="#link-to-user" class="am-comment-author">{{Auth::user()->name}}</a>
                     </div>
                 </header>
-
                 <div class="am-comment-bd">
+                    <form class="am-form">
+                        <div class="am-form-group">
+                            <label for="doc-ta-1">Rate the work!</label>
+                            <div class="am-text-primary" id="new-rating"></div>
 
+                        </div>
+                        <div class="am-form-group">
+                            <label for="content">Say something about the work</label>
+                            <textarea class="" rows="5" id="new-content" name="content"></textarea>
+                        </div>
+                        <input type="hidden" name="id" value="{{$paper['id']}}">
+                        <button type="submit" class="am-btn am-btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
         </article>
@@ -76,5 +86,16 @@
 </div>
 @endsection
 @section('script')
-
+<script src="{{asset('packages/jquery.raty.js')}}"></script>
+<script>
+$('#new-rating').raty({
+    scoreName: 'rating',
+    target : '#new-content',
+    targetFormat : 'I think it is a {score} work. ',
+    targetKeep : true,
+    click: function() {
+        $('#new-content').focus();
+    }
+});
+</script>
 @endsection
