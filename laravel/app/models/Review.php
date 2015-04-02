@@ -26,7 +26,19 @@ class Review extends \Eloquent {
     }
 
     public static function getReviewsByPaperId($paper_id) {
-        return static::where('paper_id', $paper_id)->get()->toArray();
+        $flag = array(
+            '',
+            'danger',
+            'danger',
+            'warning',
+            'success',
+            'success'
+        );
+        $reivews = static::where('paper_id', $paper_id)->orderBy('id','desc')->get()->toArray();
+        foreach($reivews as &$reivew) {
+            $reivew['flag'] = $flag[$reivew['rating']];
+        }
+        return $reivews;
     }
 
     public static function getPaperRatings($paper_id) {

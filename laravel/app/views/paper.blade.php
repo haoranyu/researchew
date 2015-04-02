@@ -27,8 +27,14 @@
             Publish date: {{date("Y-m-d h:i", $paper['date'])}} / Indexed time: {{$paper['created_at']}}
         </div>
     </div>
-    <div class="review am-u-sm-10 am-u-sm-centered">
-        <article class="am-comment">
+    <ul class="reviews am-u-sm-10 am-u-sm-centered am-comment-list" id="reviews">
+        @if(Session::has('success_msg'))
+        <div class="am-alert am-alert-success" data-am-alert>
+            {{ Session::get('success_msg') }}
+        </div>
+        @endif
+        @foreach ($reviews as $review)
+        <li class="am-comment am-comment-{{$review['flag']}} @if($review['rating'] < 3) am-comment-flip @endif">
             <a href="">
                 <img class="am-comment-avatar" alt="User Avatar" src="{{asset('img/head.png')}}"/>
             </a>
@@ -36,17 +42,22 @@
             <div class="am-comment-main">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
-                    <a href="#link-to-user" class="am-comment-author">#USERNAME#</a>
-                    Add a review
+                    <a href="#link-to-user" class="am-comment-author">{{User::find($review['user_id'])->name}}</a> @ {{$review['created_at']}}
+                    <small class="am-text-{{$review['flag']}} am-fr">
+                        @while($review['rating']--)
+                        <span class="am-icon-star"></span>
+                        @endwhile
+                    </small>
                     </div>
                 </header>
 
                 <div class="am-comment-bd">
-
+                    {{$review['content']}}
                 </div>
             </div>
-        </article>
-    </div>
+        </li>
+        @endforeach
+    </ul>
     <div class="review am-u-sm-10 am-u-sm-centered">
         @if(!Auth::check())
         <div class="am-alert am-alert-warning" data-am-alert>
@@ -65,9 +76,9 @@
                     </div>
                 </header>
                 <div class="am-comment-bd">
-                    @if(Session::has('message'))
+                    @if(Session::has('error_msg'))
                     <div class="am-alert am-alert-danger" data-am-alert>
-                        {{ Session::get('message') }}
+                        {{ Session::get('error_msg') }}
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>

@@ -6,9 +6,9 @@ class ReviewController extends BaseController {
         $validator = Validator::make(Input::all(), Review::$rules);
         if ($validator->passes() && Auth::check()) {
             Review::addReview(Input::get('content'), Input::get('rating'), Auth::user()->id, Input::get('id'));
-            return Redirect::to('/user/login')->with('message', 'Welcome! Please Log in.');
+            return Redirect::to('/paper/'.hash('sha1', Input::get('id')).'#reviews')->with('success_msg', 'Yeah! You successful reviewed the paper!');
         } else {
-            return Redirect::to('/paper/'.hash('sha1', Input::get('id')).'#new-review')->with('message', 'Failed posting review!')->withErrors($validator)->withInput();
+            return Redirect::to('/paper/'.hash('sha1', Input::get('id')).'#new-review')->with('error_msg', 'Failed posting review!')->withErrors($validator)->withInput();
         }
     }
 }
