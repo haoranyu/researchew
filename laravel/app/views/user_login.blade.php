@@ -20,7 +20,7 @@ Login - Researchew
                         <label for="password">Password</label>
                         {{ Form::password('password', array('class'=>'', 'placeholder'=>'Please type in your password')) }}
                     </div>
-                    <p><button type="submit" class="am-btn am-btn-primary am-btn-block">Submit</button></p>
+                    <button type="submit" class="am-btn am-btn-primary am-btn-block">Submit</button>
                 {{ Form::close() }}
             </div>
         </div>
