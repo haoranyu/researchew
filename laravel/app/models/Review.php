@@ -17,12 +17,19 @@ class Review extends \Eloquent {
 
 
     public static function addReview($content, $rating, $user_id, $paper_id) {
-        $review = new Review;
-        $review->content = $content;
-        $review->rating = $rating;
-        $review->user_id = $user_id;
-        $review->paper_id = $paper_id;
-        $review->save();
+        if(!self::hasReview($paper_id, $user_id)) {
+            $review = new Review;
+            $review->content = $content;
+            $review->rating = $rating;
+            $review->user_id = $user_id;
+            $review->paper_id = $paper_id;
+            $review->save();
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
     public static function getReviewsByPaperId($paper_id) {
@@ -43,5 +50,9 @@ class Review extends \Eloquent {
 
     public static function getPaperRatings($paper_id) {
         return static::where('paper_id', $paper_id)->groupBy('rating')->orderBy('rating')->get()->toArray();
+    }
+
+    private static function hasReview($paper_id, $user_id) {
+        return static::where('paper_id', $paper_id)->where('user_id', $user_id)->exists();
     }
 }
