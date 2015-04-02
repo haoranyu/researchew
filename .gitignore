@@ -4,5 +4,5 @@
 /.vagrant/
 /*/app/storage
 /laravel5/
-
+/laraval/bower_components/
 .idea/
