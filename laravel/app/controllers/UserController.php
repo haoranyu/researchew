@@ -3,10 +3,20 @@
 class UserController extends BaseController {
 
     public function getRegister() {
-         return View::make('user_register');
+        if(!Auth::check()) {
+            return View::make('user_register');
+        }
+        else {
+            return Redirect::to('/')->with('message','Welcome, you can review now.');
+        }
     }
     public function getLogin() {
-         return View::make('user_login');
+        if(!Auth::check()) {
+            return View::make('user_login');
+        }
+        else {
+            return Redirect::to('/')->with('message','Welcome, you can review now.');
+        }
     }
     public function getLogout() {
         if(Auth::check()){

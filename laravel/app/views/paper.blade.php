@@ -42,10 +42,36 @@
                 </header>
 
                 <div class="am-comment-bd">
-                    
+
                 </div>
             </div>
         </article>
+    </div>
+    <div class="review am-u-sm-10 am-u-sm-centered">
+        @if(!Auth::check())
+        <div class="am-alert am-alert-warning" data-am-alert>
+        You need to <strong><a href="/user/login">Log In</a></strong> first before you review this paper.
+        </div>
+        @else
+        <article class="am-comment">
+            <a href="">
+                <img class="am-comment-avatar" alt="User Avatar" src="{{asset('img/head.png')}}"/>
+            </a>
+
+            <div class="am-comment-main">
+                <header class="am-comment-hd">
+                    <div class="am-comment-meta">
+                    <a href="#link-to-user" class="am-comment-author">#USERNAME#</a>
+                    Add a review
+                    </div>
+                </header>
+
+                <div class="am-comment-bd">
+
+                </div>
+            </div>
+        </article>
+        @endif
     </div>
 </div>
 @endsection
