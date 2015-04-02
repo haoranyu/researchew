@@ -22,7 +22,7 @@ Route::get('/user/logout', 'UserController@getLogout');
 Route::post('/user/create', 'UserController@postCreate');
 Route::post('/user/auth', 'UserController@postAuth');
 
-
+Route::post('/review/create', 'ReviewController@postCreate');
 
 Route::filter('auth', function()
 {

@@ -58,26 +58,36 @@
                 <img class="am-comment-avatar" alt="User Avatar" src="{{asset('img/head.png')}}"/>
             </a>
 
-            <div class="am-comment-main">
+            <div class="am-comment-main" id="new-review">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
                     Post review as <a href="#link-to-user" class="am-comment-author">{{Auth::user()->name}}</a>
                     </div>
                 </header>
                 <div class="am-comment-bd">
-                    <form class="am-form">
+                    @if(Session::has('message'))
+                    <div class="am-alert am-alert-danger" data-am-alert>
+                        {{ Session::get('message') }}
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    {{ Form::open(array('url'=>'review/create', 'class'=>'am-form')) }}
                         <div class="am-form-group">
                             <label for="doc-ta-1">Rate the work!</label>
                             <div class="am-text-primary" id="new-rating"></div>
-
                         </div>
                         <div class="am-form-group">
                             <label for="content">Say something about the work</label>
-                            <textarea class="" rows="5" id="new-content" name="content"></textarea>
+                            {{ Form::textarea('content', null, array('class'=>'', 'rows'=>'5', 'id'=>'new-content', 'placeholder'=>'Please say something about how you think about this paper...')) }}
+
                         </div>
                         <input type="hidden" name="id" value="{{$paper['id']}}">
                         <button type="submit" class="am-btn am-btn-primary">Submit</button>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </article>

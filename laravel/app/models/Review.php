@@ -2,6 +2,12 @@
 
 class Review extends \Eloquent {
 
+
+    public static $rules = array(
+        'rating'=>'required|numeric|digits_between:1,5',
+        'content'=>'required'
+        );
+
     /**
      * The database table used by the model.
      *
@@ -16,7 +22,7 @@ class Review extends \Eloquent {
         $review->rating = $rating;
         $review->user_id = $user_id;
         $review->paper_id = $paper_id;
-        $paper->save();
+        $review->save();
     }
 
     public static function getReviewsByPaperId($paper_id) {
