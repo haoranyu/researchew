@@ -46,6 +46,8 @@
                     @if($review['user_id'] == Auth::user()->id)
                      - <a class="am-icon-edit edit"></a>
                      - <a class="am-icon-trash-o delete"></a>
+                    @elseif(Auth::user()->role == 1)
+                     - <a class="am-icon-trash-o delete"></a>
                     @endif
                     <small class="am-text-{{$review['flag']}} am-fr">
                         @while($review['rating']--)

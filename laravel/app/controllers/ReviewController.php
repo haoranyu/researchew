@@ -18,7 +18,9 @@ class ReviewController extends BaseController {
     }
 
     public function postDelete() {
-        if(Review::find(Input::get('id'))->delete()) {
+        $review = Review::find(Input::get('id'));
+        if(Auth::user()->id == $review->user_id || Auth::user()->role == 1) {
+            $review->delete();
             return Response::json(true);
         }
         Response::json(false);
