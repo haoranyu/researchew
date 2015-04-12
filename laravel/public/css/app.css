@@ -32,6 +32,11 @@ ol.author li {
     padding: 30px 100px;
     text-align: center;
 }
+@media only screen and (max-width: 640px) {
+    .search-box {
+        padding: 30px 0;
+    }
+}
 .search-box h1 {
     font-size: 50px;
 }

@@ -4,7 +4,7 @@ Researchew
 @endsection
 @section('content')
 <div class="am-container">
-    <div class="search-box am-u-sm-10 am-u-sm-centered">
+    <div class="search-box am-u-md-10 am-u-md-centered am-u-sm-12">
         @if(Session::has('message'))
         <div class="am-alert am-alert-success" data-am-alert>
             {{ Session::get('message') }}
