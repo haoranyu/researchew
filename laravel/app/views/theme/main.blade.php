@@ -51,7 +51,7 @@
     <![endif]-->
     <script src="{{ asset('/packages/amazeui/dist/js/amazeui.min.js ') }}"></script>
     <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, });
     </script>
     @yield('script')
 </body>
