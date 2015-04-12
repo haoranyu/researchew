@@ -9,7 +9,7 @@
             <li><a href="../../">Search</a></li>
             <li class="active">Keyword: {{$query}}</li>
         </ol>
-        @if($reviews && $page == 1)
+        @if(isset($reviews) && $page == 1)
         <section class="am-panel am-panel-secondary">
             <div class="am-panel-hd">Recent 5 related reviews</div>
             <ul class="am-list am-list-static">
