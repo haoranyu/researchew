@@ -17,7 +17,7 @@ class BOW extends \Eloquent {
             $review = preg_replace('/[^\p{L}\p{N}\s]/u', '', $review['content']);
             $review_bag = explode(' ', $review);
             foreach($review_bag as $word) {
-                $word = strtolower($word);
+                $word = strtolower(trim($word));
                 if($word != '' && !self::isCommonWord($word)) {
                     array_push($words_bag, $word);
                 }
