@@ -134,11 +134,11 @@ $('#new-rating').raty({
         $('#new-content').focus();
     }
 });
-$(document).on('click','[data-user="{{Auth::user()->id}}"] .edit', function() {
+$(document).on('click','.edit', function() {
     $('.review').removeClass('am-hide');
     $('.review #new-content').val($('[data-user="{{Auth::user()->id}}"] .content').text().trim());
 });
-$(document).on('click','[data-user="{{Auth::user()->id}}"] .delete', function(){
+$(document).on('click','.delete', function(){
     var review = $(this).parents('li');
     $.ajax({
         url: '/review/delete',
