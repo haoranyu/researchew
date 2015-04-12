@@ -43,7 +43,7 @@
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
                     <a href="#link-to-user" class="am-comment-author">{{$review['user']->name}}</a> @ {{$review['created_at']}}
-                    @if($logged_user_posted != false)
+                    @if($review['user_id'] == Auth::user()->id)
                      <a class="am-icon-edit edit"></a>
                     @endif
                     <small class="am-text-{{$review['flag']}} am-fr">
