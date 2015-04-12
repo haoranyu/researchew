@@ -36,13 +36,13 @@
         @foreach ($reviews as $review)
         <li class="am-comment am-comment-{{$review['flag']}} @if($review['rating'] < 3) am-comment-flip @endif">
             <a href="">
-                <img class="am-comment-avatar" alt="User Avatar" src="{{asset('img/head.png')}}"/>
+                <img class="am-comment-avatar" src="http://www.gravatar.com/avatar/{{$review['avatar']}}?d=monsterid" alt=""/>
             </a>
 
             <div class="am-comment-main">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
-                    <a href="#link-to-user" class="am-comment-author">{{User::find($review['user_id'])->name}}</a> @ {{$review['created_at']}}
+                    <a href="#link-to-user" class="am-comment-author">{{$review['user']->name}}</a> @ {{$review['created_at']}}
                     <small class="am-text-{{$review['flag']}} am-fr">
                         @while($review['rating']--)
                         <span class="am-icon-star"></span>
@@ -66,7 +66,7 @@
         @else
         <article class="am-comment">
             <a href="">
-                <img class="am-comment-avatar" alt="User Avatar" src="{{asset('img/head.png')}}"/>
+                <img class="am-comment-avatar" alt="User Avatar" src="http://www.gravatar.com/avatar/{{md5( strtolower( trim( Auth::user()->email ) ) )}}?d=monsterid"/>
             </a>
 
             <div class="am-comment-main" id="new-review">

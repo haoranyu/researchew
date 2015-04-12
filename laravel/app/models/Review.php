@@ -41,11 +41,14 @@ class Review extends \Eloquent {
             'success',
             'success'
         );
-        $reivews = static::where('paper_id', $paper_id)->orderBy('id','desc')->get()->toArray();
-        foreach($reivews as &$reivew) {
-            $reivew['flag'] = $flag[$reivew['rating']];
+        $reviews = static::where('paper_id', $paper_id)->orderBy('id','desc')->get()->toArray();
+        foreach($reviews as &$review) {
+            $review['flag'] = $flag[$review['rating']];
+            $review['user'] = User::find($review['user_id']);
+            $review['avatar'] = md5( strtolower( trim( $review['user']->email ) ) );
         }
-        return $reivews;
+
+        return $reviews;
     }
 
     public static function getPaperRatings($paper_id) {

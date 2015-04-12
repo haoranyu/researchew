@@ -143,9 +143,7 @@ SCRIPT
 
   config.vm.provision :shell, inline: <<SCRIPT
     cp -pf /vagrant/dev/vagrant/laravel-env.sh /etc/profile.d/laravel-env.sh
-    mysql -uroot -pvagrant -e 'create database if not exists rc_review'
-    mysql -uroot -pvagrant -e 'create database if not exists rc_paper'
-    mysql -uroot -pvagrant -e 'create database if not exists rc_user'
+    mysql -uroot -pvagrant -e 'create database if not exists researchew'
 SCRIPT
 
 end
