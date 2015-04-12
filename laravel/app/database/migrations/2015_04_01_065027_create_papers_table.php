@@ -18,7 +18,7 @@ class CreatePapersTable extends Migration {
             $table->string('hash', 40);
             $table->string('title', 255);
             $table->text('abstract')->nullable();
-            $table->string('author', 255)->nullable();
+            $table->text('author')->nullable();
             $table->integer('date');
             $table->timestamps();
 
