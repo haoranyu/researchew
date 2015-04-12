@@ -17,6 +17,9 @@
 
     <link rel="stylesheet" href="{{ asset('/packages/amazeui/dist/css/amazeui.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+    <script type="text/javascript"
+      src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 </head>
 
 <body>
@@ -47,7 +50,9 @@
     <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
     <![endif]-->
     <script src="{{ asset('/packages/amazeui/dist/js/amazeui.min.js ') }}"></script>
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
     @yield('script')
 </body>
 
