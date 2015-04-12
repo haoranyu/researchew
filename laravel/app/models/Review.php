@@ -46,9 +46,9 @@ class Review extends \Eloquent {
         $flag = array(
             '',
             'danger',
-            'danger',
             'warning',
-            'success',
+            'primary',
+            'secondary',
             'success'
         );
 
@@ -69,6 +69,21 @@ class Review extends \Eloquent {
 
     public static function getPaperRatings($paper_id) {
         return static::where('paper_id', $paper_id)->groupBy('rating')->orderBy('rating')->get()->toArray();
+    }
+
+    public static function getReviewDistribute($paper_id) {
+        $distribute[5] = static::where('paper_id', $paper_id)->where('rating', 5)->count();
+        $distribute[4] = static::where('paper_id', $paper_id)->where('rating', 4)->count();
+        $distribute[3] = static::where('paper_id', $paper_id)->where('rating', 3)->count();
+        $distribute[2] = static::where('paper_id', $paper_id)->where('rating', 2)->count();
+        $distribute[1] = static::where('paper_id', $paper_id)->where('rating', 1)->count();
+        $sum = array_sum($distribute);
+        foreach($distribute as &$d) {
+            if($sum != 0) {
+                $d = $d / $sum * 100;
+            }
+        }
+        return $distribute;
     }
 
     private static function hasReview($paper_id, $user_id) {

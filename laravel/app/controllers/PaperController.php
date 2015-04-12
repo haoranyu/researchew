@@ -14,10 +14,13 @@ class PaperController extends BaseController {
         }
         $bow = BOW::getBOW($paper['id']);
 
+        $review_distribute = Review::getReviewDistribute($paper['id']);
+
         return View::make('paper')
                 ->with('paper', $paper)
                 ->with('reviews', $reviews)
                 ->with('bow', $bow)
+                ->with('review_distribute', $review_distribute)
                 ->with('logged_user_posted', $logged_user_posted);
     }
 
