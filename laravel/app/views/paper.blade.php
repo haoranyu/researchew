@@ -20,7 +20,7 @@
                 <div class="am-progress-bar am-progress-bar-success"  style="width: {{$review_distribute[5]}}%">Gorgeous</div>
                 <div class="am-progress-bar am-progress-bar-secondary"  style="width: {{$review_distribute[4]}}%">Good</div>
                 <div class="am-progress-bar"  style="width: {{$review_distribute[3]}}%">Regular</div>
-                <div class="am-progress-bar am-progress-bar-warning"  style="width: {{$review_distribute[3]}}%">Poor</div>
+                <div class="am-progress-bar am-progress-bar-warning"  style="width: {{$review_distribute[2]}}%">Poor</div>
                 <div class="am-progress-bar am-progress-bar-danger"  style="width: {{$review_distribute[1]}}%">Bad</div>
             </div>
         </div>
