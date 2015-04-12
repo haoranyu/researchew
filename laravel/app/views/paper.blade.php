@@ -44,7 +44,7 @@
                     <div class="am-comment-meta">
                     <a href="#link-to-user" class="am-comment-author">{{$review['user']->name}}</a> @ {{$review['created_at']}}
                     @if($review['user_id'] == Auth::user()->id)
-                     - <a class="am-icon-edit edit" href="new-review"></a>
+                     - <a class="am-icon-edit edit" href="#new-review"></a>
                      - <a class="am-icon-trash-o delete"></a>
                     @elseif(Auth::user()->role == 1)
                      - <a class="am-icon-trash-o delete"></a>
