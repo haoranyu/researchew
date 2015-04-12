@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="am-container">
-    <div class="paper am-article am-u-sm-10 am-u-sm-centered">
+    <div class="paper am-article am-u-md-10 am-u-md-centered am-u-sm-12">
         <div class="am-article-hd">
             <h1 class="am-article-title">{{$paper['title']}}</h1>
             <ol class="author am-article-meta am-icon-user">
@@ -27,10 +27,10 @@
         @endif
         <div class="am-article-bd">
             <div class="am-article-lead am-g">
-                <div class="am-u-sm-8" id="abstract">
+                <div class="am-u-md-8 am-u-xs-12" id="abstract">
                     {{$paper['abstract']}}
                 </div>
-                <div class="am-u-sm-4" id="cloud">
+                <div class="am-u-md-4 am-u-xs-12" id="cloud">
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             Publish date: {{date("Y-m-d h:i", $paper['date'])}} / Indexed time: {{$paper['created_at']}}
         </div>
     </div>
-    <ul class="reviews am-u-sm-10 am-u-sm-centered am-comment-list" id="reviews">
+    <ul class="reviews am-u-md-10 am-u-md-centered am-u-sm-12 am-comment-list" id="reviews">
         @if(Session::has('success_msg'))
         <div class="am-alert am-alert-success" data-am-alert>
             {{ Session::get('success_msg') }}
@@ -82,7 +82,7 @@
         </li>
         @endforeach
     </ul>
-    <div class="review am-u-sm-10 am-u-sm-centered {{$logged_user_posted}}" >
+    <div class="review am-u-md-10 am-u-md-centered am-u-sm-12 {{$logged_user_posted}}" >
         @if(!Auth::check())
         <div class="am-alert am-alert-warning" data-am-alert>
         You need to <strong><a href="/user/login">Log In</a></strong> first before you review this paper.
@@ -176,7 +176,9 @@ $(document).on('click','.delete', function(){
 });
 @endif
 
+@if($bow != false)
 $('#cloud').height($('#abstract').height());
+@endif
 
 var word_array = [
     @foreach($bow as $word => $freq)
