@@ -8,7 +8,7 @@ class PaperController extends BaseController {
         $reviews = Review::getReviewsByPaperId($paper['id']);
         $logged_user_posted = false;
         foreach($reviews as $review) {
-            if(Auth::user()->id == $review['user_id']) {
+            if(Auth::check() && Auth::user()->id == $review['user_id']) {
                 $logged_user_posted = 'am-hide';
             }
         }
