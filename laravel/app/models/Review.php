@@ -64,7 +64,7 @@ class Review extends \Eloquent {
     }
 
     public static function getReviewsByQuery($query) {
-        return static::where('content', 'LIKE', '%'.$query.'%')->take(5)->get()->toArray();
+        return static::where('content', 'LIKE', '%'.$query.'%')->orderBy('id', 'desc')->take(5)->get()->toArray();
     }
 
     public static function getPaperRatings($paper_id) {
