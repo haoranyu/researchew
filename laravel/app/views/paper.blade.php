@@ -151,6 +151,7 @@ $('#new-rating').raty({
         $('#new-content').focus();
     }
 });
+@if(Auth::check())
 $(document).on('click','.edit', function() {
     $('.review').removeClass('am-hide');
     $('.review #new-content').val($('[data-user="{{Auth::user()->id}}"] .content').text().trim());
@@ -171,6 +172,7 @@ $(document).on('click','.delete', function(){
         }
     });
 });
+@endif
 
 $('#cloud').height($('#abstract').height());
 
