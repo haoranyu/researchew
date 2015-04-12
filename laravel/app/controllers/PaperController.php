@@ -12,10 +12,12 @@ class PaperController extends BaseController {
                 $logged_user_posted = 'am-hide';
             }
         }
+        $bow = BOW::getBOW($paper['id']);
 
         return View::make('paper')
                 ->with('paper', $paper)
                 ->with('reviews', $reviews)
+                ->with('bow', $bow)
                 ->with('logged_user_posted', $logged_user_posted);
     }
 

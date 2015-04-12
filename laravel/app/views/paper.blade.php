@@ -14,8 +14,12 @@
             </ol>
         </div>
         <div class="am-article-bd">
-            <div class="am-article-lead">
-                {{$paper['abstract']}}
+            <div class="am-article-lead am-g">
+                <div class="am-u-sm-8" id="abstract">
+                    {{$paper['abstract']}}
+                </div>
+                <div class="am-u-sm-4" id="cloud">
+                </div>
             </div>
         </div>
         <div class="am-article-divider"></div>
@@ -122,6 +126,7 @@
 @endsection
 @section('script')
 <script src="{{asset('packages/jquery.raty.js')}}"></script>
+<script src="{{asset('packages/jqcloud-1.0.4.js')}}"></script>
 <script>
 $('#new-rating').raty({
     scoreName: 'rating',
@@ -154,5 +159,16 @@ $(document).on('click','.delete', function(){
         }
     });
 });
+
+$('#cloud').height($('#abstract').height());
+
+var word_array = [
+    @foreach($bow as $word => $freq)
+        {text: "{{$word}}", weight: {{$freq}}},
+    @endforeach
+];
+
+$("#cloud").jQCloud(word_array);
+
 </script>
 @endsection
