@@ -9,6 +9,21 @@
             <li><a href="../../">Search</a></li>
             <li class="active">Keyword: {{$query}}</li>
         </ol>
+        @if($reviews && $page == 1)
+        <section class="am-panel am-panel-secondary">
+            <div class="am-panel-hd">Recent 5 related reviews</div>
+            <ul class="am-list am-list-static">
+                @foreach ($reviews as $review)
+                <li>
+                    @<strong>{{User::find($review['user_id'])->name}}</strong>:  {{$review['content']}}
+                    <small>
+                        <a target="_blank" href="../../paper/{{hash('sha1', $review['id'])}}" class="am-icon-external-link"></a>
+                    </small>
+                </li>
+                @endforeach
+            </ul>
+        </section>
+        @endif
         @if(!$empty)
         <ul class="result">
             @foreach ($results as $result)

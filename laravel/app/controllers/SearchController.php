@@ -33,8 +33,11 @@ class SearchController extends BaseController {
                 );
         }
 
+        $reviews = Review::getReviewsByQuery($query);
+
         return View::make('search')
                 ->with('query', $query)
+                ->with('reviews', $reviews)
                 ->with('results', $results)
                 ->with('next', $next)
                 ->with('prev', $prev)
