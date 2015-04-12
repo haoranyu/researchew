@@ -34,7 +34,7 @@
         </div>
         @endif
         @foreach ($reviews as $review)
-        <li class="am-comment am-comment-{{$review['flag']}} @if($review['rating'] < 3) am-comment-flip @endif" data-user="{{$review['user_id']}}">
+        <li class="am-comment am-comment-{{$review['flag']}} @if($review['rating'] < 3) am-comment-flip @endif" data-user="{{$review['user_id']}}" data-reviewid="{{$review['id']}}">
             <a href="">
                 <img class="am-comment-avatar" src="http://www.gravatar.com/avatar/{{$review['avatar']}}?d=monsterid" alt=""/>
             </a>
@@ -44,7 +44,8 @@
                     <div class="am-comment-meta">
                     <a href="#link-to-user" class="am-comment-author">{{$review['user']->name}}</a> @ {{$review['created_at']}}
                     @if($review['user_id'] == Auth::user()->id)
-                     <a class="am-icon-edit edit"></a>
+                     - <a class="am-icon-edit edit"></a>
+                     - <a class="am-icon-trash-o delete"></a>
                     @endif
                     <small class="am-text-{{$review['flag']}} am-fr">
                         @while($review['rating']--)
@@ -75,11 +76,13 @@
             <div class="am-comment-main" id="new-review">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
-                        @if($logged_user_posted != false)
-                        Edit review as
-                        @else
-                        Post review as
-                        @endif
+                        <span id="new-review-title">
+                            @if($logged_user_posted != false)
+                            Edit review as
+                            @else
+                            Post review as
+                            @endif
+                        </span>
                         <a href="#link-to-user" class="am-comment-author">{{Auth::user()->name}}</a>
                     </div>
                 </header>
@@ -96,11 +99,7 @@
                     @endif
                     {{ Form::open(array('url'=>'review/create', 'class'=>'am-form')) }}
                         <div class="am-form-group">
-                            @if($logged_user_posted != false)
-                            <label for="doc-ta-1">Rerate the work!</label>
-                            @else
-                            <label for="doc-ta-1">Rate the work!</label>
-                            @endif
+                            Rate the work!
 
                             <div class="am-text-primary" id="new-rating"></div>
                         </div>
@@ -137,6 +136,21 @@ $(document).on('click','[data-user="{{Auth::user()->id}}"] .edit', function() {
     $('.review').removeClass('am-hide');
     $('.review #new-content').val($('[data-user="{{Auth::user()->id}}"] .content').text().trim());
 });
-
+$(document).on('click','[data-user="{{Auth::user()->id}}"] .delete', function(){
+    var review = $(this).parents('li');
+    $.ajax({
+        url: '/review/delete',
+        type: 'POST',
+        data:{id: review.data('reviewid')},
+        dataType: 'json',
+        timeout: 13000,
+        success: function(data){
+            alert('You have successfully removed your review and you can post a new one if you want.');
+            $('.review').removeClass('am-hide');
+            review.remove();
+            $('#new-review-title').text('Post review as');
+        }
+    });
+});
 </script>
 @endsection

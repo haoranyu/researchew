@@ -23,6 +23,7 @@ Route::post('/user/create', 'UserController@postCreate');
 Route::post('/user/auth', 'UserController@postAuth');
 
 Route::post('/review/create', 'ReviewController@postCreate');
+Route::post('/review/delete', 'ReviewController@postDelete');
 
 Route::filter('auth', function()
 {

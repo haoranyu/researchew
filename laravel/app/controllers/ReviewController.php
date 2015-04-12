@@ -16,4 +16,11 @@ class ReviewController extends BaseController {
             return Redirect::to('/paper/'.hash('sha1', Input::get('id')).'#new-review')->with('error_msg', 'Failed posting review!')->withErrors($validator)->withInput();
         }
     }
+
+    public function postDelete() {
+        if(Review::find(Input::get('id'))->delete()) {
+            return Response::json(true);
+        }
+        Response::json(false);
+    }
 }
