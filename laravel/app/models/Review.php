@@ -29,7 +29,17 @@ class Review extends \Eloquent {
         else {
             return false;
         }
+    }
 
+    public static function updateReview($content, $rating, $user_id, $paper_id) {
+        if(self::hasReview($paper_id, $user_id)) {
+            $review = static::where('paper_id', $paper_id)->where('user_id', $user_id);
+            $review->update(array('content' => $content, 'rating' => $rating));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public static function getReviewsByPaperId($paper_id) {
@@ -41,11 +51,13 @@ class Review extends \Eloquent {
             'success',
             'success'
         );
+
         $reviews = static::where('paper_id', $paper_id)->orderBy('id','desc')->get()->toArray();
         foreach($reviews as &$review) {
             $review['flag'] = $flag[$review['rating']];
             $review['user'] = User::find($review['user_id']);
             $review['avatar'] = md5( strtolower( trim( $review['user']->email ) ) );
+
         }
 
         return $reviews;

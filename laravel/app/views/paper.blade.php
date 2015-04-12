@@ -34,7 +34,7 @@
         </div>
         @endif
         @foreach ($reviews as $review)
-        <li class="am-comment am-comment-{{$review['flag']}} @if($review['rating'] < 3) am-comment-flip @endif">
+        <li class="am-comment am-comment-{{$review['flag']}} @if($review['rating'] < 3) am-comment-flip @endif" data-user="{{$review['user_id']}}">
             <a href="">
                 <img class="am-comment-avatar" src="http://www.gravatar.com/avatar/{{$review['avatar']}}?d=monsterid" alt=""/>
             </a>
@@ -43,6 +43,9 @@
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
                     <a href="#link-to-user" class="am-comment-author">{{$review['user']->name}}</a> @ {{$review['created_at']}}
+                    @if($logged_user_posted != false)
+                     <a class="am-icon-edit edit"></a>
+                    @endif
                     <small class="am-text-{{$review['flag']}} am-fr">
                         @while($review['rating']--)
                         <span class="am-icon-star"></span>
@@ -51,14 +54,14 @@
                     </div>
                 </header>
 
-                <div class="am-comment-bd">
+                <div class="am-comment-bd content">
                     {{$review['content']}}
                 </div>
             </div>
         </li>
         @endforeach
     </ul>
-    <div class="review am-u-sm-10 am-u-sm-centered">
+    <div class="review am-u-sm-10 am-u-sm-centered {{$logged_user_posted}}" >
         @if(!Auth::check())
         <div class="am-alert am-alert-warning" data-am-alert>
         You need to <strong><a href="/user/login">Log In</a></strong> first before you review this paper.
@@ -72,7 +75,12 @@
             <div class="am-comment-main" id="new-review">
                 <header class="am-comment-hd">
                     <div class="am-comment-meta">
-                    Post review as <a href="#link-to-user" class="am-comment-author">{{Auth::user()->name}}</a>
+                        @if($logged_user_posted != false)
+                        Edit review as
+                        @else
+                        Post review as
+                        @endif
+                        <a href="#link-to-user" class="am-comment-author">{{Auth::user()->name}}</a>
                     </div>
                 </header>
                 <div class="am-comment-bd">
@@ -88,7 +96,12 @@
                     @endif
                     {{ Form::open(array('url'=>'review/create', 'class'=>'am-form')) }}
                         <div class="am-form-group">
+                            @if($logged_user_posted != false)
+                            <label for="doc-ta-1">Rerate the work!</label>
+                            @else
                             <label for="doc-ta-1">Rate the work!</label>
+                            @endif
+
                             <div class="am-text-primary" id="new-rating"></div>
                         </div>
                         <div class="am-form-group">
@@ -111,12 +124,19 @@
 <script>
 $('#new-rating').raty({
     scoreName: 'rating',
+    @if($logged_user_posted == false)
     target : '#new-content',
     targetFormat : 'I think it is a {score} work. ',
     targetKeep : true,
+    @endif
     click: function() {
         $('#new-content').focus();
     }
 });
+$(document).on('click','[data-user="{{Auth::user()->id}}"] .edit', function() {
+    $('.review').removeClass('am-hide');
+    $('.review #new-content').val($('[data-user="{{Auth::user()->id}}"] .content').text().trim());
+});
+
 </script>
 @endsection
