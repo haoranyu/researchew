@@ -14,6 +14,7 @@ class BOW extends \Eloquent {
 
         $words_bag = array();
         foreach($reviews as $review) {
+            $review = str_replace(PHP_EOL, ' ', $review);
             $review = preg_replace('/[^\p{L}\p{N}\s]/u', '', $review['content']);
             $review_bag = explode(' ', $review);
             foreach($review_bag as $word) {
@@ -24,8 +25,60 @@ class BOW extends \Eloquent {
             }
         }
         $words_bag = array_count_values($words_bag);
+        $words_total = array_sum($words_bag);
+
+        foreach($words_bag as &$word) {
+            $word = $word / $words_total;
+        }
+
         arsort($words_bag);
         return $words_bag;
+    }
+
+    public static function getAbstractBOW($paper_id) {
+        $abstruct = Paper::getAbstract($paper_id);
+        $words_bag = array();
+
+        $abstruct = str_replace(PHP_EOL, ' ', $abstruct);
+        $abstruct = preg_replace('/[^\p{L}\p{N}\s]/u', '', $abstruct);
+        $abstruct_bag = explode(' ', $abstruct);
+        foreach($abstruct_bag as $word) {
+            $word = strtolower(trim($word));
+            if($word != '' && !self::isCommonWord($word)) {
+                array_push($words_bag, $word);
+            }
+        }
+
+        $words_bag = array_count_values($words_bag);
+        $words_total = array_sum($words_bag);
+
+        foreach($words_bag as &$word) {
+            $word = $word / $words_total;
+        }
+
+        arsort($words_bag);
+        return $words_bag;
+    }
+
+    public static function getDiff($paper_id) {
+        $reviews_bag = static::getBOW($paper_id);
+        $abstruct_bag = static::getAbstractBOW($paper_id);
+
+        $diff_bag = array();
+
+        foreach($reviews_bag as $word => $weight) {
+
+            if(array_key_exists($word, $abstruct_bag)) {
+                if($weight - ($abstruct_bag[$word]) > 0){
+                    $diff_bag[$word] = $weight - ($abstruct_bag[$word]);
+                }
+            }
+            else {
+                $diff_bag[$word] = $weight;
+            }
+        }
+        arsort($diff_bag);
+        return $diff_bag;
     }
 
     public static function isCommonWord($word) {

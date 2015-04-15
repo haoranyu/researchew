@@ -34,6 +34,20 @@
                 </div>
             </div>
         </div>
+
+        <div class="am-article-divider"></div>
+
+        @if($new_idea)
+        <div class="am-article-bd">
+            <div class="am-article-lead am-g">
+                <strong>Recommended keywords about new ideas: </strong>
+                @foreach($new_idea as $key => $value)
+                    <span title="Rank: {{$value}}">{{$key}}</span>
+                @endforeach
+            </div>
+        </div>
+        @endif
+        
         <div class="am-article-divider"></div>
         <div class="am-article-meta">
             <a href="{{$paper['id']}}" target="blank" class="am-icon-external-link">

@@ -26,7 +26,12 @@ class Paper extends \Eloquent {
             $paper->date = $date;
             $paper->save();
         }
+    }
 
+    public static function getAbstract($id) {
+        $hash = hash('sha1', $id);
+        $paper = static::where('hash', $hash)->first()->toArray();
+        return $paper['abstract'];
     }
 
 }
