@@ -67,18 +67,24 @@ class BOW extends \Eloquent {
         $diff_bag = array();
 
         foreach($reviews_bag as $word => $weight) {
-
-            if(array_key_exists($word, $abstruct_bag)) {
-                if($weight - ($abstruct_bag[$word]) > 0){
-                    $diff_bag[$word] = $weight - ($abstruct_bag[$word]);
+            if(!static::isDefaultWord($word)) {
+                if(array_key_exists($word, $abstruct_bag)) {
+                    if($weight - ($abstruct_bag[$word]) > 0){
+                        $diff_bag[$word] = $weight - ($abstruct_bag[$word]);
+                    }
                 }
-            }
-            else {
-                $diff_bag[$word] = $weight;
+                else {
+                    $diff_bag[$word] = $weight;
+                }
             }
         }
         arsort($diff_bag);
         return $diff_bag;
+    }
+
+    public static function isDefaultWord($word) {
+        $default_words = array('work', 'regular', 'wonderful', 'poor', 'great', 'bad', 'gorgeous', 'good');
+        return in_array($word, $default_words);
     }
 
     public static function isCommonWord($word) {
