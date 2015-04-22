@@ -33,7 +33,7 @@ class SearchController extends BaseController {
                 );
         }
 
-        $reviews = Review::getReviewsByQuery($query);
+        $reviews = Review::join('users', 'reviews.user_id', '=', 'users.id')->where('reviews.content', 'LIKE', '%'.$query.'%')->orderBy('reviews.id', 'desc')->take(5)->get()->toArray();
 
         return View::make('search')
                 ->with('query', $query)

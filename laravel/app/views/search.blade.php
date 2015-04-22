@@ -15,7 +15,7 @@
             <ul class="am-list am-list-static">
                 @foreach ($reviews as $review)
                 <li>
-                    @<strong>{{User::find($review['user_id'])->name}}</strong>:  {{$review['content']}}
+                    @<strong>{{$review['name']}}</strong>:  {{$review['content']}}
                     <small>
                         <a target="_blank" href="../../paper/{{hash('sha1', $review['paper_id'])}}" class="am-icon-external-link"></a>
                     </small>
