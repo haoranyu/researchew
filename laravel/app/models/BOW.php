@@ -68,16 +68,14 @@ class BOW extends \Eloquent {
 
         foreach($reviews_bag as $word => $weight) {
             if(!static::isDefaultWord($word)) {
-                if(array_key_exists($word, $abstruct_bag)) {
-                    if($weight - ($abstruct_bag[$word]) > 0){
-                        $diff_bag[$word] = $weight - ($abstruct_bag[$word]);
-                    }
+                if(!isset($abstruct_bag[$word])) {
+                    $abstruct_bag[$word] = 0;
                 }
-                else {
-                    $diff_bag[$word] = $weight;
-                }
+
+                $diff_bag[$word] = $weight / 2 + ($weight / ($abstruct_bag[$word] + $weight));
             }
         }
+
         arsort($diff_bag);
         return $diff_bag;
     }

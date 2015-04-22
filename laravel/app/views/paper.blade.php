@@ -1,3 +1,7 @@
+<?php
+print_r($new_idea);
+?>
+
 @extends('theme/main')
 @section('title')
 {{$paper['title']}} - Researchew
@@ -47,7 +51,7 @@
             </div>
         </div>
         @endif
-        
+
         <div class="am-article-divider"></div>
         <div class="am-article-meta">
             <a href="{{$paper['id']}}" target="blank" class="am-icon-external-link">
