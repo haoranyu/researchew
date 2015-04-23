@@ -1,7 +1,3 @@
-<?php
-print_r($new_idea);
-?>
-
 @extends('theme/main')
 @section('title')
 {{$paper['title']}} - Researchew
